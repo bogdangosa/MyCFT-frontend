@@ -32,7 +32,8 @@ const Login = () => {
             <form className='login-form flex-center' onSubmit={handleSubmit}>
                 <SimpleInput type='email' label='Email:' value={email} setValue={handleEmailChange} />
                 <SimpleInput type='password' label='Password:' value={password} setValue={handlePasswordChange} />
-                <SimpleButton type="submit">Login</SimpleButton>
+                <SimpleButton type="submit" className="login-btn">Login</SimpleButton>
+                <p className='c-text1'>You don't have an accout? <span className='c-primary' onClick={()=>navigate("/SignUp")}>SignUp</span></p>
             </form>
         </div>
     );

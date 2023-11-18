@@ -59,3 +59,8 @@
     color: var(--text2);
     opacity: 0.8;
 }
+
+.simple-input-container label{
+    font-size: 0.9rem;
+    color: var(--text);
+}
