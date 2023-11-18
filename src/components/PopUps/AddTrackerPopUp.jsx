@@ -3,9 +3,16 @@ import PopUpContainer from '../Containers/PopUpContainer';
 import SimpleButton from '../Buttons/SimpleButton';
 import SelectableField from '../FormElements/SelectableField';
 import './AddTrackerPopUp.css';
+import { useNavigate } from 'react-router-dom';
 
 const AddTrackerPopUp = ({close}) => {
     const [selectedField,setSelectedField] = useState("water");
+    const navigate  = useNavigate();
+
+    const AddTracker = ()=>{
+        if(selectedField=="car")
+            navigate("/Map");
+    }
 
   return (
     <PopUpContainer className="popup-add-tracker flex-start" close={()=>close()}>
@@ -17,7 +24,7 @@ const AddTrackerPopUp = ({close}) => {
 
         </div>
 
-        <SimpleButton>next</SimpleButton>
+        <SimpleButton onClick={()=>AddTracker()}>next</SimpleButton>
     </PopUpContainer>
   );
 };
