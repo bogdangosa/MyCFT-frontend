@@ -2,16 +2,28 @@ import React, { useState } from 'react';
 import './Home.css';
 import AddTrackerPopUp from '../components/PopUps/AddTrackerPopUp';
 import StatElement from '../components/Cards/StatElement';
+import AddConsumptionPopUp from '../components/PopUps/AddConsumptionPopUp';
+import SimpleButton from '../components/Buttons/SimpleButton';
+import { auth } from '../Firebase';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../contexts/UserContext';
 
 const Home = () => {
   const [AddTrackerPopUpState,setAddTrackerPopUpState] = useState(false)
-
+  const [AddConsumptionOf,setAddConsumptionOf] = useState() // ["water","energy"]
+  const navigate = useNavigate();
   const user = {
     name: 'Bogdan',
     email: 'bogdan.gosa@gmail.com',
     car_consumption: 7.5,
     water_consumption: 100,
     energy_consumption: 23,
+  }
+  const user2 = useUserContext();
+
+  const logOut = ()=>{
+    signOut(auth).then(()=>navigate("/Login"))
   }
 
   return (
@@ -30,9 +42,10 @@ const Home = () => {
         <StatElement label="Car" percentage={77} icon={<img src='./travel-icon.svg'/>} unit={user.car_consumption +" kg CO2"}/>
       </section>
 
+      <SimpleButton onClick={()=>logOut()}>log out</SimpleButton>
 
-
-      {AddTrackerPopUpState && <AddTrackerPopUp close={()=>setAddTrackerPopUpState(false)}/>} 
+      {AddConsumptionOf!=undefined && <AddConsumptionPopUp tracker={AddConsumptionOf} close={()=>setAddConsumptionOf(undefined)}/>}
+      {AddTrackerPopUpState && <AddTrackerPopUp openPopUp={(type)=>{setAddConsumptionOf(type);setAddTrackerPopUpState(false)}} close={()=>setAddTrackerPopUpState(false)}/>} 
 
     </div>
   );

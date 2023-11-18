@@ -5,13 +5,17 @@ import SelectableField from '../FormElements/SelectableField';
 import './AddTrackerPopUp.css';
 import { useNavigate } from 'react-router-dom';
 
-const AddTrackerPopUp = ({close}) => {
+const AddTrackerPopUp = ({close,openPopUp}) => {
     const [selectedField,setSelectedField] = useState("water");
     const navigate  = useNavigate();
 
     const AddTracker = ()=>{
         if(selectedField=="car")
             navigate("/Map");
+        else if(selectedField=="energy")
+          openPopUp("energy");
+        else if(selectedField=="water")
+          openPopUp("water");
     }
 
   return (
@@ -28,5 +32,8 @@ const AddTrackerPopUp = ({close}) => {
     </PopUpContainer>
   );
 };
+
+
+
 
 export default AddTrackerPopUp;

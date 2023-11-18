@@ -1,9 +1,11 @@
 
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './Map.css';
 
 const Map = () => {
+    const [YourLocation, setYourLocation] = useState(undefined);
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
     });
@@ -11,29 +13,39 @@ const Map = () => {
     const center = useMemo(() => ({lat: 46.770334, lng: 23.578434}), []);
 
     useEffect(() => {
-      console.log(import.meta.env.VITE_GOOGLE_API_KEY);
+      navigator.geolocation.getCurrentPosition((position) => {
+        if (position.coords.latitude != YourLocation?.lat || position.coords.longitude != YourLocation?.lng)
+          setYourLocation({lat:position.coords.latitude,lng: position.coords.longitude});
+      });
     }, []);
 
+    const renderGoogleMap = useMemo(() => {
+      console.log(YourLocation);
+      return (
+        <GoogleMap
+        mapContainerClassName="map-container"
+        options={{
+          styles: googleMapsStyle, 
+          fullscreenControl: false, 
+          zoomControl: false, 
+          mapTypeControl: false, 
+          streetViewControl: false, 
+          keyboardShortcuts: false
+        }} 
+        center={YourLocation}
+        zoom={13}
+      >
+        {YourLocation!=undefined ? <Marker icon={{url:"./circle.svg",scale:1}} key={YourLocation.lng} position={YourLocation} />: <></>}
+      </GoogleMap>
+      );
+    },[isLoaded,YourLocation]);
 
+
+    
     if (!isLoaded) return <div>Loading...</div>;
-
   return (
     <div>
-        <GoogleMap
-          mapContainerClassName="map-container"
-          options={{
-            styles: googleMapsStyle, 
-            fullscreenControl: false, 
-            zoomControl: false, 
-            mapTypeControl: false, 
-            streetViewControl: false, 
-            keyboardShortcuts: false
-          }} 
-          center={center}
-          zoom={13}
-        >
-          <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
-        </GoogleMap>
+        {renderGoogleMap}
 
     </div>
   );
