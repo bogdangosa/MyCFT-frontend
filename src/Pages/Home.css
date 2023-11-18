@@ -24,3 +24,10 @@
 .arrow-link:hover{
     left: 0.25rem;
 }
+
+.stats-section{
+    flex-direction: column;
+    align-items: flex-start!important;
+    gap: 1rem;
+    margin-top: 1rem;
+}

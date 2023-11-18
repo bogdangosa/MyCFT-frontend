@@ -1,7 +1,7 @@
 .simple-button{
     cursor: pointer;
     background: var(--primary);
-    color: var(--text1);
+    color: var(--background1);
     padding: 0.5rem 1.5rem;
     border-radius: 0.25rem;
     -webkit-border-radius: 0.25rem;

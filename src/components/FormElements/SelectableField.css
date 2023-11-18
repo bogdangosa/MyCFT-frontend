@@ -1,0 +1,20 @@
+.selectable-field{
+    padding: 0.5rem 1rem;
+    width: 100%;
+    transition: 0.25s;
+    border: 1px solid var(--primary);
+    border-radius: 0.25rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -ms-transition: 0.25s;
+    -o-transition: 0.25s;
+}
+
+.selectable-field-selected{
+    background: var(--primary);
+    color: var(--background1);
+}
