@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --primary: #4CA488;
+    --secondary: #4CA488;
+    --text1: #333;
+    --text2: #888;
+    --background1: #F8FEFE;
+    --background2: #D9FFF5;
+}
+
+
+html, body{
+    font-family: 'Nunito', sans-serif;
+}
+
+.bg-transparent {
+    background: transparent;
+}
+.bg-primary {
+    background-color: var(--primary);
+}
+.bg-secondary {
+    background-color: var(--secondary);
+}
+.background1 {
+    background-color: var(--background1);
+}
+.background2 {
+    background-color: var(--background2);
+}
+
+.c-primary {
+    color: var(--primary);
+}
+.c-secondary {
+    color: var(--secondary);
+}
+.c-text1 {
+    color: var(--text1);
+}
+.c-text2 {
+    color: var(--text2);
+}
+
+
+h1 {
+    font-size: 40px;
+}
+h2 {
+    font-size: 32px;
+}
+h3 {
+    font-size: 26px;
+}
+h4 {
+    font-size: 24px;
+}
+p {
+    font-size: 18px;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 1440px;
+}
+
+.flex-center{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.flex-space-between{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.flex-start{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+}
+
+.flex-end {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: end;
+        -ms-flex-align: end;
+            align-items: end;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+}
+
+.flex-strech {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+}
+
+@media only screen and (max-width: 1439px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+@media only screen and (max-width: 1199px) {
+    .container {
+        max-width: 100%;
+        margin-left:3rem;
+        margin-right:3rem;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .container {
+        margin-left:2rem;
+        margin-right:2rem;
+    }
+}
+@media only screen and (max-width: 766px) {
+    .container {
+        margin-left:2rem;
+        margin-right:2rem;
+    }
+    h1 {
+        font-size: 32px!important;
+    }
+    h2 {
+        font-size: 26px!important;
+    }
+    h3{
+        font-size: 20px!important;
+    }
+    p{
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 575px) {
+    .container {
+        margin-left:1.5rem;
+        margin-right:1.5rem;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .container {
+        margin-left:0.5rem;
+        margin-right:0.5rem;
+    }
+}

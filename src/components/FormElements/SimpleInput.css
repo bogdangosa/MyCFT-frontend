@@ -1,0 +1,61 @@
+.simple-input-container{
+    flex-direction: column;
+    gap: 0.25rem;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start!important;
+    -webkit-justify-content: flex-start!important;
+        -ms-flex-pack: start!important;
+            justify-content: flex-start!important;
+    -webkit-box-align: start!important;
+    -webkit-align-items: flex-start!important;
+        -ms-flex-align: start!important;
+            align-items: flex-start!important;
+    width: 100%;
+    max-width: 100%;
+}
+.simple-input{
+    border: none;
+    background: var(--background1);
+    outline: none;
+    padding: 0.9rem 1.5rem;
+    color: var(--text1);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    border: 1px solid var(--primary);
+    line-height: 1.6em;
+    width: 100%;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+.labeled-input::-webkit-input-placeholder{
+    color: var(--text2);
+    opacity: 0.8;
+}
+
+.labeled-input::-moz-placeholder{
+    color: var(--text2);
+    opacity: 0.8;
+}
+
+.labeled-input:-ms-input-placeholder{
+    color: var(--text2);
+    opacity: 0.8;
+}
+
+.labeled-input::-ms-input-placeholder{
+    color: var(--text2);
+    opacity: 0.8;
+}
+
+.labeled-input::placeholder{
+    color: var(--text2);
+    opacity: 0.8;
+}
