@@ -5,6 +5,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Home from './Pages/Home';
 import SignUp from './Pages/Authentification/SignUp';
 import Login from './Pages/Authentification/Login';
+import Map from './Pages/Map';
 
 
 
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
         <Route index element={<Home/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/SignUp' element={<SignUp/>}/>
+        <Route path='/Map' element={<Map/>}/>
       </Route>
   )
 )
