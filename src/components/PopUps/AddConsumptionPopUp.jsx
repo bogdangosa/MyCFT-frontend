@@ -20,6 +20,9 @@ const AddConsumptionPopUp = ({close,tracker}) => {
             value:value,
             start_date:end_date,
             end_date:end_date,
+              headers:{
+                "ngrok-skip-browser-warning": "69420",
+              }
         })
         if(response.data=="valid")
             close();

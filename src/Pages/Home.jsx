@@ -66,7 +66,11 @@ const Home = () => {
   },[])
 
   const getTrackerData =async () =>{
-    const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/trackers/all/${user2.uid}`)
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/trackers/all/${user2.uid}`,{
+      headers:{
+        "ngrok-skip-browser-warning": "69420",
+      }
+    })
     console.log(response.data);
     const water_emissions = response.data.filter((tracker)=>tracker.tracker=="water").reduce((total,tracker)=>total+tracker.emissions,0);
     console.log(water_emissions);

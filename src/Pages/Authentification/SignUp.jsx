@@ -60,6 +60,9 @@ const SignUp = () => {
             const response = await axios.post(`${import.meta.env.VITE_SERVER_ADRESS}/users/${userCredentials.user.uid}`,{
                 email: email,
                 name: name,
+                headers:{
+                    "ngrok-skip-browser-warning": "69420",
+                }
             }).catch((error)=>{
                 console.log(error);
             })

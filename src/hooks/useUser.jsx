@@ -22,7 +22,11 @@ const useUser = () => {
 
 
     const getUserData = async (user) => {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/users/${user.uid}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/users/${user.uid}`,
+        {
+            headers:{
+              "ngrok-skip-browser-warning": "69420",
+        }});
        setUser({...user,...response.data});
        console.log({...user,...response.data});
 
