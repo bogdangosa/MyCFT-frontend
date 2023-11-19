@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import SimpleButton from '../../components/Buttons/SimpleButton';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../Firebase';
+import axios from 'axios';
 
 const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [ErrorText,setErrorText] = useState('')
     const navigate = useNavigate();
 
     const handleNameChange = (e) => {
@@ -27,6 +29,8 @@ const SignUp = () => {
         e.preventDefault();
         createUserWithEmailAndPassword(auth,email,password).then(async(userCredentials)=>{
             console.log(userCredentials);
+            
+            loginToServer(userCredentials);
             navigate("/");
             // close();
           }).catch((error)=>{
@@ -52,6 +56,15 @@ const SignUp = () => {
             });
         }
 
+        const loginToServer = async (userCredentials) => {   
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_ADRESS}/users/${userCredentials.user.uid}`,{
+                email: email,
+                name: name,
+            }).catch((error)=>{
+                console.log(error);
+            })
+        }
+
     return (
         <div className='login-container container flex-center'>
             <form className='login-form flex-center' onSubmit={signUpUser}>
@@ -59,6 +72,7 @@ const SignUp = () => {
                 <SimpleInput type='email' label='Email:' value={email} setValue={handleEmailChange} />
                 <SimpleInput type='password' label='Password:' value={password} setValue={handlePasswordChange} />
                 <SimpleButton type="submit" className="login-btn">Sign Up</SimpleButton>
+                <p className='error-text'>{ErrorText}</p>
                 <p className='c-text1'>You already have an accout? <span className='c-primary' onClick={()=>navigate("/Login")}>Log in</span></p>
             </form>
         </div>

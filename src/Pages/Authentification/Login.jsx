@@ -5,11 +5,12 @@ import './Authentification.css';
 import SimpleButton from '../../components/Buttons/SimpleButton';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../Firebase';
+import axios from 'axios';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorText, setErrorText] = useState('');
+    const [ErrorText, setErrorText] = useState('');
     const navigate = useNavigate();
 
 
@@ -43,10 +44,12 @@ const Login = () => {
           break;
         default:
           console.log(error.message);
+          setErrorText(error.message);
           break;
       }
     })
   }
+
 
 
 
@@ -56,6 +59,7 @@ const Login = () => {
                 <SimpleInput type='email' label='Email:' value={email} setValue={handleEmailChange} />
                 <SimpleInput type='password' label='Password:' value={password} setValue={handlePasswordChange} />
                 <SimpleButton type="submit" className="login-btn">Login</SimpleButton>
+                <p className='error-text'>{ErrorText}</p>
                 <p className='c-text1'>You don't have an accout? <span className='c-primary' onClick={()=>navigate("/SignUp")}>SignUp</span></p>
             </form>
         </div>
