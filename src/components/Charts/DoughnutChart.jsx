@@ -4,7 +4,13 @@ import Chart from 'chart.js/auto';
 
 const DoughnutChart = ({data})=>{
 
-    return <Doughnut data={data} options={{}}></Doughnut>
+    return <Doughnut data={data} options={{
+        plugins: {
+          legend: {
+            display: false,
+          },           
+        }
+      }}></Doughnut>
 }
 
 export default DoughnutChart;
