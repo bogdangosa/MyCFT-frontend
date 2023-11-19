@@ -10,13 +10,23 @@ const useUser = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user)=>{
             console.log(user);
-            if(user)
+            if(user){
                 setUser(user);
+                getUserData(user.uid);
+            }
             else
                 setUser("no user");
         })
         return ()=>unsubscribe();
     },[]); 
+
+
+    const getUserData = async (uid) => {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/users/${uid}`);
+       setUser({...User,...response.data});
+       console.log({...User,...response.data});
+
+    }
 
     const updateUser = (data)=>{
         setUser(data);

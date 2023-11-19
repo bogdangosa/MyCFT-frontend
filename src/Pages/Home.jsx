@@ -55,7 +55,7 @@ const Home = () => {
   return (
     <div className='home container'>
         <section className="top-text-container flex-start">
-          <h1 className='c-text1'>Hey {user.name},</h1>
+          <h1 className='c-text1'>Hey {user2.name},</h1>
           <p className='c-text2'>Take charge of your environmental impact with personalized insights and easy-to-use trackers</p>
           <div className="arrow-link c-primary flex-start" onClick={()=>setAddTrackerPopUpState(true)}>
             <p>Add tracker</p>
