@@ -44,13 +44,6 @@ const Home = () => {
   });
   const user2 = useUserContext();
 
-  const logOut = ()=>{
-    signOut(auth).then(()=>{
-      updateUser("no user")
-      navigate("/Login")
-    })
-  }
-
   return (
     <div className='home container'>
         <section className="top-hero-container flex-start">
@@ -80,8 +73,6 @@ const Home = () => {
 
           <BarChart data={ConsumptionChart}/>
         </div>
-      <SimpleButton style={{marginTop:"1rem"}} onClick={()=>logOut()}>log out</SimpleButton>
-
       {AddConsumptionOf!=undefined && <AddConsumptionPopUp tracker={AddConsumptionOf} close={()=>setAddConsumptionOf(undefined)}/>}
       {AddTrackerPopUpState && <AddTrackerPopUp openPopUp={(type)=>{setAddConsumptionOf(type);setAddTrackerPopUpState(false)}} close={()=>setAddTrackerPopUpState(false)}/>} 
 

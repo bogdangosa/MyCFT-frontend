@@ -16,6 +16,7 @@
             align-items: flex-start!important;
     width: 100%;
     max-width: 100%;
+    position: relative;
 }
 .simple-input{
     border: none;
@@ -63,4 +64,17 @@
 .simple-input-container label{
     font-size: 0.9rem;
     color: var(--text);
+}
+
+.simple-input-container .unit-value{
+    position:absolute;
+    right: 1rem;
+    top: 50%;
+    color: var(--text2);
+    opacity: 0.8;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
 }

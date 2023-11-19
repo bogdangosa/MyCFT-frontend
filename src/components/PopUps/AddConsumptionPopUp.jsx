@@ -30,7 +30,7 @@ const AddConsumptionPopUp = ({close,tracker}) => {
   return (
     <PopUpContainer className="popup-add-consumption flex-start" close={()=>close()}>
         <h3>Add {tracker} consumption</h3>
-        <SimpleInput type="number" placeholder="Enter consumption" value={value} setValue={(e)=>setValue(e.target.value)}/>
+        <SimpleInput unit={tracker=="water"?"liters":"kWh"} type="number" placeholder="Enter consumption" value={value} setValue={(e)=>setValue(e.target.value)}/>
         <SimpleButton onClick={()=>sendTracker()}>next</SimpleButton>
     </PopUpContainer>
   );
