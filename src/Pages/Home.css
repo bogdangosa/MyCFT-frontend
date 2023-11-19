@@ -36,3 +36,8 @@
     width: 100%;
     margin-top: 1rem;
 }
+
+.doughnut-chart-container{
+    width: 50%;
+    margin-left: 50%;
+}

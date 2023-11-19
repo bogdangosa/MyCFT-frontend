@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMyUserUpdate, useUserContext } from '../contexts/UserContext';
 import { consumption_data } from '../data/consumption_data';
 import BarChart from '../components/Charts/BarChart';
+import DoughnutChart from '../components/Charts/DoughnutChart';
 
 const Home = () => {
   const [AddTrackerPopUpState,setAddTrackerPopUpState] = useState(false)
@@ -19,7 +20,7 @@ const Home = () => {
   const user = {
     name: 'Bogdan',
     email: 'bogdan.gosa@gmail.com',
-    car_consumption: 7.5,
+    car_consumption: 15,
     water_consumption: 70,
     energy_consumption: 23,
   }
@@ -33,14 +34,12 @@ const Home = () => {
         hoverBackgroundColor:["#333"]
     }],
   });
-  const [DoughnutChartData,setDoughnutChartData] = useState({
-    labels: ["Water","Energy","Car"],
+  const [DoughnutChartDataValue,setDoughnutChartDataValue] = useState({
+    labels: ['Water','Energy','Car'],
     datasets:[{
         label:"Total Consumption",
         data: [user.water_consumption,user.energy_consumption,user.car_consumption],
-        backgroundColor: ["#4CA488",,"#4CA488","#4CA488"],
-        barPercentage:0.5,
-        hoverBackgroundColor:["#333","#333","#333"]
+        backgroundColor: ["#4CA488","#ED4C86","#4C52ED"],
     }],
   });
   const user2 = useUserContext();
@@ -55,7 +54,7 @@ const Home = () => {
   return (
     <div className='home container'>
         <section className="top-text-container flex-start">
-          <h1 className='c-text1'>Hey {user2.name},</h1>
+          <h1 className='c-text1'>Hey {user2?.name},</h1>
           <p className='c-text2'>Take charge of your environmental impact with personalized insights and easy-to-use trackers</p>
           <div className="arrow-link c-primary flex-start" onClick={()=>setAddTrackerPopUpState(true)}>
             <p>Add tracker</p>
@@ -63,7 +62,9 @@ const Home = () => {
           </div>
         </section>
 
-        {/*<DoughnutChartData data={DoughnutChartData}/>*/}
+        <div className="doughnut-chart-container">
+          <DoughnutChart data={DoughnutChartDataValue}/>
+        </div>
       <section className="stats-section flex-start">
         <StatElement label="Energy" percentage={25} icon={<img src='./energy-icon.svg'/>} unit={user.energy_consumption +" kg CO2"}/>
         <StatElement label="Water" percentage={60} icon={<img src='./water-icon.svg'/>} unit={user.water_consumption +" kg CO2"}/>
