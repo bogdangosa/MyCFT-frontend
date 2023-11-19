@@ -12,7 +12,7 @@ const useUser = () => {
             console.log(user);
             if(user){
                 setUser(user);
-                getUserData(user.uid);
+                getUserData(user);
             }
             else
                 setUser("no user");
@@ -21,10 +21,10 @@ const useUser = () => {
     },[]); 
 
 
-    const getUserData = async (uid) => {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/users/${uid}`);
-       setUser({...User,...response.data});
-       console.log({...User,...response.data});
+    const getUserData = async (user) => {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/users/${user.uid}`);
+       setUser({...user,...response.data});
+       console.log({...user,...response.data});
 
     }
 

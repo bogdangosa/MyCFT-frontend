@@ -5,6 +5,13 @@
 .top-bar{
     width: 100%;
 }
+img{
+    display: block;
+}
+
+.label-container{
+    gap: 0.5rem;
+}
 
 .percentage-bar-container{
     width: 100%;

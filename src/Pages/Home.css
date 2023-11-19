@@ -11,6 +11,10 @@
     gap: 0.3rem;
 }
 
+.container-text-top .description{
+    font-size: 0.9rem;
+}
+
 .arrow-link{
     gap: 0.25rem;
     font-weight: 500;
@@ -44,5 +48,5 @@
 }
 
 .doughnut-chart-container{
-    width: 30%;
+    width: 40%;
 }
