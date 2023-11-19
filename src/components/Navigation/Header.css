@@ -58,6 +58,9 @@
     color: var(--primary);
 }
 
+.header .logo{
+    height: 2rem;
+}
 
 .visible-nav{
     right: 0;

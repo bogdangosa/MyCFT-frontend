@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import AddTrackerPopUp from '../components/PopUps/AddTrackerPopUp';
 import StatElement from '../components/Cards/StatElement';
@@ -11,18 +11,23 @@ import { useMyUserUpdate, useUserContext } from '../contexts/UserContext';
 import { consumption_data } from '../data/consumption_data';
 import BarChart from '../components/Charts/BarChart';
 import DoughnutChart from '../components/Charts/DoughnutChart';
+import axios from 'axios';
 
 const Home = () => {
   const [AddTrackerPopUpState,setAddTrackerPopUpState] = useState(false)
   const [AddConsumptionOf,setAddConsumptionOf] = useState() // ["water","energy"]
   const navigate = useNavigate();
   const updateUser = useMyUserUpdate();
+  const [WaterEmissions,setWaterEmissions] = useState(0);
+  const [EnergyEmissions,setEnergyEmissions] = useState(0);
+  const [CarEmissions,setCarEmissions] = useState(0);
+  const [TotalEmissons,setTotalEmissons] = useState(100);
   const user = {
     name: 'Bogdan',
     email: 'bogdan.gosa@gmail.com',
-    car_consumption: 15,
+    car_consumption: 55,
     water_consumption: 70,
-    energy_consumption: 23,
+    energy_consumption: 50,
   }
   const [ConsumptionChart,setConsumtionChart] = useState({
     labels: consumption_data?.map((day_consumption)=>day_consumption.day),
@@ -38,11 +43,40 @@ const Home = () => {
     labels: ['Water','Energy','Car'],
     datasets:[{
         label:"Total Consumption",
-        data: [user.water_consumption,user.energy_consumption,user.car_consumption],
+        data: [WaterEmissions,EnergyEmissions,CarEmissions],
         backgroundColor: ["#4CA488","#ED4C86","#4C52ED"],
     }],
   });
+
+  useEffect(()=>{
+    setDoughnutChartDataValue({
+      labels: ['Water','Energy','Car'],
+      datasets:[{
+          label:"Total Consumption",
+          data: [WaterEmissions,EnergyEmissions,CarEmissions],
+          backgroundColor: ["#4CA488","#ED4C86","#4C52ED"],
+      }],
+    })
+
+  },[WaterEmissions,EnergyEmissions,CarEmissions])
   const user2 = useUserContext();
+
+  useEffect(()=>{
+    getTrackerData();
+  },[])
+
+  const getTrackerData =async () =>{
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_ADRESS}/trackers/all/${user2.uid}`)
+    console.log(response.data);
+    const water_emissions = response.data.filter((tracker)=>tracker.tracker=="water").reduce((total,tracker)=>total+tracker.emissions,0);
+    console.log(water_emissions);
+    const energy_emissions = response.data.filter((tracker)=>tracker.tracker=="energy").reduce((total,tracker)=>total+tracker.emissions,0);
+    console.log(energy_emissions);
+    setWaterEmissions(water_emissions);
+    setEnergyEmissions(energy_emissions);
+    setCarEmissions(user.car_consumption)
+    setTotalEmissons(water_emissions+energy_emissions+user.car_consumption)
+  }
 
   return (
     <div className='home container'>
@@ -60,9 +94,9 @@ const Home = () => {
         </div>
         </section>
       <section className="stats-section flex-start">
-        <StatElement label="Energy" percentage={user.energy_consumption} icon={<img src='./energy-icon.svg'/>} unit={user.energy_consumption +" kg CO2"}/>
-        <StatElement label="Water" percentage={user.water_consumption} icon={<img src='./water-icon.svg'/>} unit={user.water_consumption +" kg CO2"}/>
-        <StatElement label="Car" percentage={user.car_consumption} icon={<img src='./travel-icon.svg'/>} unit={user.car_consumption +" kg CO2"}/>
+        <StatElement label="Energy" percentage={Math.floor(EnergyEmissions/TotalEmissons*100)} icon={<img src='./energy-icon.svg'/>} unit={Math.floor(EnergyEmissions) +" kg CO2"}/>
+        <StatElement label="Water" percentage={Math.floor(WaterEmissions/TotalEmissons*100)} icon={<img src='./water-icon.svg'/>} unit={Math.floor(WaterEmissions) +" kg CO2"}/>
+        <StatElement label="Transportation" percentage={Math.floor(CarEmissions/TotalEmissons*100)} icon={<img src='./travel-icon.svg'/>} unit={CarEmissions +" kg CO2"}/>
       </section>
 
         <div className="period-container">
@@ -73,7 +107,7 @@ const Home = () => {
 
           <BarChart data={ConsumptionChart}/>
         </div>
-      {AddConsumptionOf!=undefined && <AddConsumptionPopUp tracker={AddConsumptionOf} close={()=>setAddConsumptionOf(undefined)}/>}
+      {AddConsumptionOf!=undefined && <AddConsumptionPopUp tracker={AddConsumptionOf} close={()=>{setAddConsumptionOf(undefined);getTrackerData()}}/>}
       {AddTrackerPopUpState && <AddTrackerPopUp openPopUp={(type)=>{setAddConsumptionOf(type);setAddTrackerPopUpState(false)}} close={()=>setAddTrackerPopUpState(false)}/>} 
 
     </div>

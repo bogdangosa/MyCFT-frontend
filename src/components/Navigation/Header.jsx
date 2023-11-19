@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <header className='header container flex-space-between'>
-      <img src='./logo.svg' alt="Logo" onClick={()=>navigate('/')}/>
+      <img className='logo' src='./logo.svg' alt="Logo" onClick={()=>navigate('/')}/>
         
         
        
